@@ -1,0 +1,11 @@
+{
+  "schemaName": "CustomMetadata",
+  "inheritsFrom": [],
+  "properties": {
+    "MyVar": {
+      "typeName": "string",
+      "variability": "uniform",
+      "custom": true
+    }
+  }
+}
