@@ -3,11 +3,7 @@
 //
 
 
-#include <pxr/usd/usd/stage.h>
-#include <pxr/usd/usd/prim.h>
-#include <pxr/base/tf/token.h>
-#include <string>
-#include <pxr/usd/sdf/path.h>
+#include "stage/util.h"
 
 
 
@@ -15,9 +11,12 @@ int main() {
 
     std::string filePath = "../HelloUsd.usda";
 
-    pxr::UsdStageRefPtr stage = pxr::UsdStage::CreateNew(filePath);
-    auto xform = stage->DefinePrim(pxr::SdfPath("/hello"), pxr::TfToken("Xform"));
-    auto sphere = stage->DefinePrim(pxr::SdfPath("/hello/world"), pxr::TfToken("Sphere"));
+    pxr::UsdStageRefPtr stage = CreateStage(filePath.c_str());
+
+    SetMetadata(stage,  pxr::TfToken("endTimeCode"), pxr::VtValue(100.0));
+
+    auto xform = DefinePrim(stage, pxr::SdfPath("/hello"), pxr::TfToken("Xform"));
+    auto sphere = DefinePrim(stage, pxr::SdfPath("/hello/world"), pxr::TfToken("Sphere"));
     stage->GetRootLayer()->Save();
 
     return 0;

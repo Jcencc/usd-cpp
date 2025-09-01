@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
-set(PROJECT_NAME "usd_cpp")
-project(${PROJECT_NAME})
+
+project("usd_cpp")
 
 set(CMAKE_CXX_STANDARD 20)
 add_compile_options(/utf-8)
@@ -14,12 +14,16 @@ file(GLOB ALL_LIB_FILES
         "${LIB_DIR}/*.lib"
 )
 
-set(Python_LOCATION "C:/Program Files/Python310")
+file(GLOB SRC
+        "stage/*.cpp"
+        "stage/*.h"
+)
+
 include_directories("C:/Program Files/Python310/include")
 list(APPEND CMAKE_PREFIX_PATH "C:/github/OpenUSD")
 find_package(pxr REQUIRED)
 
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} main.cpp ${SRC})
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
         ${USD_LIBRARIES}
